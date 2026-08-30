@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Exame de consciência em 38 perguntas curtas, pelos mandamentos, para preparar a Confissão. Nada é gravado: tudo permanece no seu dispositivo.">
+<meta name="theme-color" content="#93222E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Exame de Consciência — preparação para a Confissão">
+<meta property="og:description" content="38 perguntas curtas, uma de cada vez. Ao final, um roteiro para o confessionário e um texto para a meditação.">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F3F1EC'/%3E%3Crect x='14.6' y='5' width='2.8' height='22' fill='%2393222E'/%3E%3Crect x='9' y='11' width='14' height='2.8' fill='%2393222E'/%3E%3C/svg%3E">
+<title>Exame de Consciência — preparação para a Confissão</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --papel:#F3F1EC;
+  --papel2:#FFFFFF;
+  --tinta:#171A20;
+  --rubrica:#93222E;
+  --azul:#26407A;
+  --muted:#565C66;
+  --linha:#D6D1C6;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--serif);
+  font-size:17.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:680px;margin:0 auto;padding:28px 22px 96px}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--muted);
+}
+h1{
+  font-size:clamp(30px,7vw,44px);line-height:1.12;font-weight:400;
+  color:var(--rubrica);margin:.45em 0 .3em;letter-spacing:-.01em;
+}
+h2{font-size:23px;font-weight:400;color:var(--rubrica);margin:0 0 .25em;line-height:1.28}
+p{margin:0 0 1em}
+a{color:var(--azul)}
+
+/* ---------- cordao de contas (desktop) ---------- */
+.rail{
+  position:fixed;left:26px;top:0;height:100vh;
+  display:none;flex-direction:column;justify-content:center;align-items:center;
+  gap:11px;pointer-events:none;
+}
+.rail .grupo{display:flex;flex-direction:column;gap:clamp(2px,.55vh,5px)}
+.bead{width:5px;height:5px;border-radius:50%;background:var(--linha);transition:background .4s ease}
+.bead.feita{background:var(--rubrica)}
+.bead.aqui{background:var(--azul);box-shadow:0 0 0 3px rgba(38,64,122,.18)}
+@media(min-width:940px){.rail{display:flex}}
+
+/* ---------- barra (mobile) ---------- */
+.barra{display:flex;gap:3px;margin:0 0 30px}
+.barra span{flex:1;height:2px;background:var(--linha);position:relative;overflow:hidden}
+.barra span i{position:absolute;inset:0;width:0;background:var(--rubrica);transition:width .4s ease}
+@media(min-width:940px){.barra{display:none}}
+
+/* ---------- capa ---------- */
+.capa{padding-top:7vh}
+.regra{width:52px;height:2px;background:var(--rubrica);margin:26px 0}
+.oracao{
+  border-left:2px solid var(--rubrica);padding:2px 0 2px 20px;
+  color:var(--azul);font-style:italic;margin:0 0 30px;
+}
+.nota-rodape{color:var(--muted);font-size:15px;line-height:1.58}
+
+/* ---------- botoes ---------- */
+.btn{
+  font-family:var(--serif);font-size:17px;color:#fff;background:var(--rubrica);
+  border:1px solid var(--rubrica);border-radius:2px;padding:13px 26px;cursor:pointer;
+  transition:background .2s ease;
+}
+.btn:hover{background:#7C1B26}
+.btn-vazado{background:transparent;color:var(--tinta);border:1px solid #A9A297}
+.btn-vazado:hover{background:#EAE6DC;border-color:var(--tinta)}
+.link{
+  background:none;border:0;color:var(--azul);font-family:var(--serif);font-size:15.5px;
+  cursor:pointer;padding:6px 0;text-decoration:underline;text-underline-offset:3px;
+}
+.link:hover{color:var(--rubrica)}
+:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+
+/* ---------- pergunta ---------- */
+.cabeca{display:flex;align-items:baseline;gap:12px;margin-bottom:26px}
+.marcador{
+  font-family:var(--mono);font-size:12px;letter-spacing:.13em;color:#fff;background:var(--rubrica);
+  padding:3px 9px;border-radius:2px;
+}
+.bloco-titulo{font-size:15.5px;color:var(--azul);flex:1 1 auto;min-width:0}
+.pergunta{
+  font-size:clamp(21px,4.6vw,27px);line-height:1.38;color:var(--tinta);
+  margin:0 0 30px;font-weight:400;
+}
+.fade{animation:sobe .4s ease both}
+@keyframes sobe{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.fade{animation:none}*{transition:none!important}}
+
+.opcoes{display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.opc{
+  text-align:left;font-family:var(--serif);font-size:17.5px;color:var(--tinta);
+  background:var(--papel2);border:1px solid var(--linha);border-radius:3px;
+  padding:14px 18px;cursor:pointer;transition:border-color .2s ease,background .2s ease;
+}
+.opc:hover{border-color:var(--azul);background:#FBFAF6}
+.opc[data-v="2"]:hover{border-color:var(--rubrica)}
+.rodape-pergunta{display:flex;justify-content:space-between;align-items:center;gap:14px}
+textarea{
+  width:100%;margin:6px 0 14px;background:var(--papel2);color:var(--tinta);
+  border:1px solid var(--linha);border-radius:3px;padding:11px 13px;
+  font-family:var(--serif);font-size:16.5px;line-height:1.5;resize:vertical;min-height:78px;
+}
+textarea::placeholder{color:#8B9199}
+
+/* ---------- texto final ---------- */
+.saida{max-width:660px}
+.data{margin-bottom:30px}
+.sec{margin:0 0 38px}
+.sec h2{margin-bottom:10px}
+.sec .marcador{display:inline-block;margin-bottom:12px}
+.reflexao{color:var(--tinta)}
+.apontou{list-style:none;padding:0;margin:0 0 14px}
+.apontou li{
+  padding:7px 0 7px 20px;border-left:2px solid var(--linha);
+  margin-bottom:2px;color:var(--tinta);
+}
+.apontou li.forte{border-left-color:var(--rubrica)}
+.apontou .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-top:3px}
+.proposito{color:var(--azul);font-style:italic}
+.minha-nota{color:var(--muted);font-size:16px;font-style:italic;margin:2px 0 12px 20px}
+.destaque{
+  background:var(--papel2);border:1px solid var(--linha);border-left:3px solid var(--rubrica);
+  border-radius:3px;padding:20px 22px;margin:0 0 40px;
+}
+.oracao-final{
+  background:var(--papel2);border:1px solid var(--linha);border-radius:3px;padding:22px 24px;
+  color:var(--azul);font-style:italic;margin:0 0 38px;
+}
+.invocacao{
+  font-size:clamp(20px,4.4vw,25px);line-height:1.4;color:var(--rubrica);font-style:italic;
+  border-top:2px solid var(--rubrica);border-bottom:1px solid var(--linha);
+  padding:18px 0;margin:0 0 30px;
+}
+.invocacao small{display:block;font-style:normal;font-family:var(--mono);font-size:11px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.passos{padding-left:0;list-style:none;counter-reset:p}
+.passos li{counter-increment:p;padding:0 0 12px 34px;position:relative}
+.passos li::before{
+  content:counter(p);position:absolute;left:0;top:2px;
+  font-family:var(--mono);font-size:12px;color:var(--rubrica);
+}
+.acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+.fecho{margin-top:44px;color:var(--muted);font-size:15.5px;border-top:1px solid var(--linha);padding-top:18px}
+.oculto{display:none}
+
+/* ---------- roteiro enxuto ---------- */
+.switch{display:flex;gap:8px;margin:0 0 28px}
+.switch button{
+  flex:1;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  padding:11px 8px;border:1px solid var(--linha);background:transparent;color:var(--muted);
+  border-radius:2px;cursor:pointer;
+}
+.switch button.on{background:var(--rubrica);border-color:var(--rubrica);color:#fff}
+.abertura{
+  background:var(--papel2);border:1px solid var(--linha);border-left:3px solid var(--rubrica);
+  border-radius:3px;padding:16px 18px;margin:0 0 26px;font-style:italic;color:var(--tinta);
+}
+.roteiro{padding:0;list-style:none;counter-reset:r;margin:0 0 26px}
+.roteiro li{
+  counter-increment:r;padding:12px 0 12px 38px;position:relative;
+  border-bottom:1px solid var(--linha);font-size:19px;line-height:1.4;
+}
+.roteiro li::before{
+  content:counter(r) ".";position:absolute;left:0;top:16px;
+  font-family:var(--mono);font-size:12px;color:var(--rubrica);
+}
+.roteiro .freq{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block;margin-top:4px}
+.roteiro .anot{font-size:15.5px;font-style:italic;color:var(--muted);display:block;margin-top:3px}
+.grupo-titulo{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--rubrica);margin:0 0 6px}
+@media print{.switch{display:none!important}.roteiro li{border-bottom-color:#ccc}}
+
+/* ---------- modo noturno ---------- */
+@media(prefers-color-scheme:dark){
+  :root{
+    --papel:#12151A;
+    --papel2:#1B1F27;
+    --tinta:#E9E6DF;
+    --rubrica:#E8949C;
+    --azul:#A8BEEC;
+    --muted:#A6ACB6;
+    --linha:#39404B;
+  }
+  .marcador{color:#12151A;background:var(--rubrica)}
+  .btn{color:#12151A;background:var(--rubrica);border-color:var(--rubrica)}
+  .btn:hover{background:#F2AAB1}
+  .btn-vazado{color:var(--tinta);background:transparent;border-color:#5A626E}
+  .switch button.on{color:#12151A}
+  .btn-vazado:hover{background:#232833;border-color:var(--tinta)}
+  .opc:hover{background:#232833}
+  textarea::placeholder{color:#818894}
+  .bead.aqui{box-shadow:0 0 0 3px rgba(168,190,236,.22)}
+  .regra{background:var(--rubrica)}
+}
+
+@media print{
+  body{background:#fff;color:#171A20;font-size:12pt}
+  h1,h2,.marcador::before{color:#93222E}
+  .reflexao,.apontou li,.pergunta{color:#171A20}
+  .proposito,.oracao-final,.invocacao{color:#26407A}
+  .rail,.barra,.acoes,.nao-imprime{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .marcador{color:#000;background:transparent;border:1px solid #999}
+  .destaque,.oracao-final{background:#fff}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<nav class="rail" id="rail" aria-hidden="true"></nav>
+
+<main class="wrap">
+
+  <!-- ===== CAPA ===== -->
+  <section id="capa" class="capa">
+    <p class="eyebrow">Preparação para a Confissão</p>
+    <h1>Exame de<br>consciência</h1>
+    <div class="regra"></div>
+    <p>São 38 perguntas curtas, uma de cada vez, percorrendo os mandamentos. Ao final, o portal reúne o que a sua consciência apontou num texto breve, para ler na meditação e levar à confissão.</p>
+    <p class="oracao">Meu Deus e Senhor, iluminai o meu espírito, para que eu conheça a natureza e o número dos meus pecados, deles me arrependa e os confesse com verdadeira dor e firme propósito de não mais Vos ofender.</p>
+    <button class="btn" id="comecar">Começar o exame</button>
+    <p class="nota-rodape" style="margin-top:34px">Sem pressa e sem escrúpulo. Se uma pergunta não toca a sua vida, responda “não” e siga adiante — o exame é auxílio, não acusação.<br><br>Nada do que você responder sai deste dispositivo nem é gravado: ao fechar a página, tudo desaparece.</p>
+  </section>
+
+  <!-- ===== EXAME ===== -->
+  <section id="exame" class="oculto">
+    <div class="barra" id="barra"></div>
+    <div id="palco"></div>
+  </section>
+
+  <!-- ===== TEXTO PARA MEDITAÇÃO ===== -->
+  <section id="saida" class="saida oculto"></section>
+
+</main>
+
+<script>
+const PADRAO = [{t:"N\u00e3o",v:0},{t:"Uma vez ou outra",v:1},{t:"Com frequ\u00eancia",v:2}];
+const SIMNAO = [{t:"N\u00e3o",v:0},{t:"Sim",v:2}];
+const SIMLEVE = [{t:"N\u00e3o",v:0},{t:"Sim",v:1}];
+const DIAS = [{t:"Não",v:0},{t:"Alguns dias",v:1},{t:"Quase todos os dias",v:2}];
+const TEMPO = [{t:"Menos de um m\u00eas",v:0},{t:"Alguns meses",v:1},{t:"Mais de um ano",v:2}];
+
+const BLOCOS = [
+{
+  marcador:"\u00b7", titulo:"A \u00faltima confiss\u00e3o", curto:"A \u00faltima confiss\u00e3o",
+  reflexao:"Comece pelo caminho j\u00e1 andado: quanto tempo passou e o que ficou por dizer.",
+  proposito:"Dizer logo no in\u00edcio h\u00e1 quanto tempo n\u00e3o me confesso \u2014 e n\u00e3o guardar nada por vergonha.",
+  perguntas:[
+    {q:"Quanto tempo faz desde a minha \u00faltima confiss\u00e3o?", m:"faz muito tempo desde a minha \u00faltima confiss\u00e3o", opcoes:TEMPO},
+    {q:"Calei algum pecado grave por vergonha numa confiss\u00e3o anterior?", m:"calei um pecado grave por vergonha", opcoes:SIMNAO}
+  ]
+},
+{
+  marcador:"I", titulo:"Amar a Deus sobre todas as coisas", curto:"Primeiro mandamento",
+  reflexao:"O primeiro mandamento n\u00e3o pergunta se creio, mas quem governou de fato as minhas horas.",
+  proposito:"Marcar uma hora fixa de ora\u00e7\u00e3o e defend\u00ea-la como defendo um compromisso de trabalho.",
+  perguntas:[
+    {q:"Faltei \u00e0 minha ora\u00e7\u00e3o di\u00e1ria?", m:"faltei \u00e0 ora\u00e7\u00e3o di\u00e1ria", opcoes:DIAS},
+    {q:"Pus o dinheiro, o trabalho ou o reconhecimento acima de Deus?", m:"pus o trabalho e os resultados no primeiro lugar"},
+    {q:"Quis aparecer, exagerando os meus m\u00e9ritos diante dos outros?", m:"quis aparecer, exagerando os meus m\u00e9ritos"},
+    {q:"Recorri a supersti\u00e7\u00f5es, hor\u00f3scopos ou adivinhos?", m:"busquei fora de Deus o que s\u00f3 n'Ele existe"}
+  ]
+},
+{
+  marcador:"II", titulo:"N\u00e3o invocar o santo Nome de Deus em v\u00e3o", curto:"Segundo mandamento",
+  reflexao:"O nome de Deus n\u00e3o \u00e9 muleta de linguagem; e calar diante da zombaria tamb\u00e9m \u00e9 consentir.",
+  proposito:"Trocar a praga por uma jaculat\u00f3ria \u2014 a mesma boca, outra dire\u00e7\u00e3o.",
+  perguntas:[
+    {q:"Usei sem respeito o nome de Deus, de Nossa Senhora ou dos santos?", m:"usei sem respeito o nome de Deus ou dos santos"},
+    {q:"Falei com desprezo das coisas sagradas, da Igreja ou dos sacerdotes?", m:"falei com desprezo do que \u00e9 sagrado"}
+  ]
+},
+{
+  marcador:"III", titulo:"Santificar os domingos e as festas de guarda", curto:"Terceiro mandamento",
+  reflexao:"O domingo \u00e9 o dia em que o tempo deixa de ser produ\u00e7\u00e3o e volta a ser dom.",
+  proposito:"Chegar dez minutos antes da Missa e ficar alguns minutos depois, em a\u00e7\u00e3o de gra\u00e7as.",
+  perguntas:[
+    {q:"Faltei \u00e0 Missa em domingo ou dia santo por culpa minha?", m:"faltei \u00e0 Missa por culpa minha"},
+    {q:"Vivi a Missa com pressa e distra\u00e7\u00e3o?", m:"vivi a Missa com pressa e distra\u00e7\u00e3o"},
+    {q:"Comunguei consciente de pecado grave n\u00e3o confessado?", m:"comunguei sem estar em condi\u00e7\u00f5es", opcoes:SIMNAO},
+    {q:"Fiz do domingo mais um dia de trabalho, sem descanso nem fam\u00edlia?", m:"transformei o domingo em mais um dia \u00fatil"}
+  ]
+},
+{
+  marcador:"IV", titulo:"Honrar pai e m\u00e3e, e os leg\u00edtimos superiores", curto:"Quarto mandamento",
+  reflexao:"Em casa a f\u00e9 se mostra verdadeira ou apenas declarada \u2014 no tom de voz, no cansa\u00e7o descarregado em quem menos merece.",
+  proposito:"Dar hoje aten\u00e7\u00e3o inteira a algu\u00e9m da minha casa, sem tela e sem pressa.",
+  perguntas:[
+    {q:"Tratei com aspereza, impaci\u00eancia ou sil\u00eancio quem vive ao meu lado?", m:"tratei com aspereza quem vive ao meu lado"},
+    {q:"Faltei aos meus pais no respeito ou na ajuda que lhes devo?", m:"faltei com meus pais no respeito ou na ajuda"},
+    {q:"Corrigi meus filhos dominado pela ira?", m:"corrigi meus filhos dominado pela ira"},
+    {q:"Omiti a corre\u00e7\u00e3o, a forma\u00e7\u00e3o religiosa ou o cuidado com o que meus filhos veem?", m:"omiti a corre\u00e7\u00e3o e a forma\u00e7\u00e3o dos meus filhos"}
+  ]
+},
+{
+  marcador:"V", titulo:"N\u00e3o matar, nem causar dano ao corpo ou \u00e0 alma", curto:"Quinto mandamento",
+  reflexao:"Aqui pesa menos a viol\u00eancia vis\u00edvel e mais o rancor guardado, a ironia afiada e o perd\u00e3o dado s\u00f3 por fora.",
+  proposito:"Rezar hoje, pelo nome, por aquela pessoa de quem guardo m\u00e1goa.",
+  perguntas:[
+    {q:"Guardei rancor, inveja ou desprezo por algu\u00e9m?", m:"guardei rancor, inveja ou desprezo"},
+    {q:"Deixei de perdoar de verdade uma ofensa que recebi?", m:"n\u00e3o perdoei de verdade"},
+    {q:"Fui duro nas palavras \u2014 ironia, sarcasmo, grosseria?", m:"fui duro nas palavras"},
+    {q:"Descuidei da sa\u00fade, da medida no comer e no beber, ou da prud\u00eancia ao dirigir?", m:"descuidei da sa\u00fade e da prud\u00eancia"},
+    {q:"Colaborei ou incentivei algu\u00e9m ao aborto ou \u00e0 eutan\u00e1sia?", m:"colaborei com um atentado contra a vida", opcoes:SIMNAO}
+  ]
+},
+{
+  marcador:"VI \u00b7 IX", titulo:"Guardar a castidade em obras, palavras e desejos", curto:"Sexto e nono mandamentos",
+  reflexao:"O que decide a batalha costuma vir antes da queda: a tela aberta, o pensamento acolhido, a ocasi\u00e3o conservada. Examine com coragem e sem escr\u00fapulo.",
+  proposito:"Cortar a ocasi\u00e3o pela raiz: tirar do celular o caminho f\u00e1cil que j\u00e1 sei aonde leva.",
+  perguntas:[
+    {q:"Vi imagens ou v\u00eddeos impuros?", m:"vi imagens ou v\u00eddeos impuros"},
+    {q:"Acolhi pensamentos ou desejos impuros, em vez de afast\u00e1-los?", m:"acolhi pensamentos que devia ter afastado"},
+    {q:"Pratiquei atos impuros, sozinho ou com outra pessoa?", m:"pratiquei atos contr\u00e1rios \u00e0 castidade"},
+    {q:"Havia circunst\u00e2ncia que agravasse a falta \u2014 pessoa casada, consagrada, parente ou menor?", m:"havia circunst\u00e2ncia agravante que preciso mencionar", opcoes:SIMNAO},
+    {q:"Faltei \u00e0 fidelidade conjugal, em pensamento ou em ato?", m:"faltei \u00e0 fidelidade que prometi", opcoes:SIMNAO}
+  ]
+},
+{
+  marcador:"VII \u00b7 X", titulo:"N\u00e3o furtar, nem reter o que \u00e9 dos outros", curto:"S\u00e9timo e d\u00e9cimo mandamentos",
+  reflexao:"A honestidade se mede nas horas pelas quais sou pago, no pagamento que atraso porque posso, no acordo que a outra parte n\u00e3o podia conferir.",
+  proposito:"Reparar concretamente uma \u00fanica coisa que sei estar pendente.",
+  perguntas:[
+    {q:"Tomei o que n\u00e3o era meu, ou enganei algu\u00e9m num neg\u00f3cio?", m:"tomei ou lesei o que era de outro"},
+    {q:"Desperdicei o tempo de trabalho pelo qual sou pago?", m:"desperdicei o tempo pelo qual sou pago"},
+    {q:"Atrasei ou retive injustamente algo que devia pagar?", m:"retive ou atrasei o que devia pagar"},
+    {q:"Deixei sem reparar um dano ou uma d\u00edvida que sei que devo?", m:"deixei um dano sem reparar", opcoes:SIMLEVE},
+    {q:"Cobicei bens, cargos ou reconhecimento alheios?", m:"cobicei o que pertence aos outros"}
+  ]
+},
+{
+  marcador:"VIII", titulo:"N\u00e3o levantar falso testemunho nem difamar", curto:"Oitavo mandamento",
+  reflexao:"A fama do outro n\u00e3o me pertence, e uma vez ferida quase nunca se recomp\u00f5e inteira.",
+  proposito:"Falar bem, diante das mesmas pessoas, de quem eu ajudei a diminuir.",
+  perguntas:[
+    {q:"Menti, por interesse ou por h\u00e1bito?", m:"menti por interesse ou por h\u00e1bito"},
+    {q:"Difamei, caluniei ou julguei mal por boato?", m:"difamei, caluniei ou julguei por boato"},
+    {q:"Escutei com gosto quem falava mal dos outros, ou semeei disc\u00f3rdia?", m:"alimentei a maledic\u00eancia e a disc\u00f3rdia"}
+  ]
+},
+{
+  marcador:"\u00b7", titulo:"Trabalho, tempo e caridade", curto:"Deveres de estado",
+  reflexao:"O trabalho de cada dia \u00e9 mat\u00e9ria de santidade ou fuga; a diferen\u00e7a est\u00e1 na inten\u00e7\u00e3o e em quem paga a conta do excesso.",
+  proposito:"Oferecer o trabalho logo ao come\u00e7ar e encerrar o dia numa hora combinada comigo mesmo.",
+  perguntas:[
+    {q:"Deixei o trabalho tomar o tempo e as for\u00e7as que devia \u00e0 fam\u00edlia e \u00e0 ora\u00e7\u00e3o?", m:"deixei o trabalho invadir o que era da fam\u00edlia e da ora\u00e7\u00e3o"},
+    {q:"Trabalhei s\u00f3 para o meu pr\u00f3prio nome, sem oferecer o dia a Deus?", m:"trabalhei apenas para o meu pr\u00f3prio nome"},
+    {q:"Cedi \u00e0 pregui\u00e7a e \u00e0s distra\u00e7\u00f5es em vez de servir?", m:"escolhi a comodidade e a distra\u00e7\u00e3o em vez do servi\u00e7o"},
+    {q:"Deixei de ajudar quem precisava de mim, podendo faz\u00ea-lo?", m:"passei ao largo de quem precisava de mim"}
+  ]
+}
+];
+
+const lista = [];
+BLOCOS.forEach((b,bi)=>b.perguntas.forEach((p,pi)=>lista.push({bi,pi,q:p.q,m:p.m,opcoes:p.opcoes||PADRAO})));
+const respostas = lista.map(()=>({v:null,nota:"",rot:""}));
+let atual = 0;
+
+const capa = document.getElementById("capa");
+const exame = document.getElementById("exame");
+const saida = document.getElementById("saida");
+const palco = document.getElementById("palco");
+const rail = document.getElementById("rail");
+const barra = document.getElementById("barra");
+
+// cordão de contas + barra
+BLOCOS.forEach((b,bi)=>{
+  const g = document.createElement("div"); g.className = "grupo";
+  b.perguntas.forEach(()=>{ const d = document.createElement("div"); d.className="bead"; g.appendChild(d); });
+  rail.appendChild(g);
+  const s = document.createElement("span"); s.innerHTML = "<i></i>"; barra.appendChild(s);
+});
+const contas = rail.querySelectorAll(".bead");
+
+function pintarProgresso(){
+  contas.forEach((c,i)=>{
+    c.className = "bead" + (respostas[i].v!==null?" feita":"") + (i===atual?" aqui":"");
+  });
+  BLOCOS.forEach((b,bi)=>{
+    const idxs = lista.map((x,i)=>x.bi===bi?i:-1).filter(i=>i>=0);
+    const feitas = idxs.filter(i=>respostas[i].v!==null).length;
+    barra.children[bi].firstChild.style.width = (100*feitas/idxs.length)+"%";
+  });
+}
+
+function render(){
+  const item = lista[atual];
+  const b = BLOCOS[item.bi];
+  const r = respostas[atual];
+  palco.innerHTML = `
+    <div class="fade">
+      <div class="cabeca">
+        <span class="marcador">${b.marcador}</span>
+        <span class="bloco-titulo">${b.titulo}</span>
+      </div>
+      <p class="eyebrow">Pergunta ${atual+1} de ${lista.length}</p>
+      <p class="pergunta">${item.q}</p>
+      <div class="opcoes">
+        ${item.opcoes.map((o,i)=>`<button class="opc" data-v="${o.v}" data-i="${i}">${o.t}</button>`).join("")}
+      </div>
+      <div id="areaNota">${r.nota?`<textarea id="nota" placeholder="Uma anotação para lembrar na confissão">${r.nota}</textarea>`:""}</div>
+      <div class="rodape-pergunta">
+        <button class="link" id="voltar" ${atual===0?"disabled style='opacity:.35'":""}>← Voltar</button>
+        <button class="link" id="anotar">${r.nota?"":"+ anotação"}</button>
+      </div>
+    </div>`;
+  palco.querySelectorAll(".opc").forEach(el=>el.addEventListener("click",()=>responder(+el.dataset.v,item.opcoes[+el.dataset.i].t)));
+  document.getElementById("voltar").addEventListener("click",()=>{ if(atual>0){ guardarNota(); atual--; render(); }});
+  document.getElementById("anotar").addEventListener("click",()=>{
+    const area = document.getElementById("areaNota");
+    if(!document.getElementById("nota")){
+      area.innerHTML = `<textarea id="nota" placeholder="Uma anotação para lembrar na confissão"></textarea>`;
+      document.getElementById("nota").focus();
+      document.getElementById("anotar").textContent = "";
+    }
+  });
+  pintarProgresso();
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+function guardarNota(){
+  const n = document.getElementById("nota");
+  if(n) respostas[atual].nota = n.value.trim();
+}
+
+function responder(v,rot){
+  guardarNota();
+  respostas[atual].v = v;
+  respostas[atual].rot = rot;
+  if(atual < lista.length-1){ atual++; render(); }
+  else finalizar();
+}
+
+document.getElementById("comecar").addEventListener("click",()=>{
+  capa.classList.add("oculto");
+  exame.classList.remove("oculto");
+  render();
+});
+
+function finalizar(){
+  exame.classList.add("oculto");
+  rail.style.display = "none";
+  saida.innerHTML = montarTexto();
+  saida.classList.remove("oculto");
+  window.scrollTo({top:0,behavior:"instant"});
+  document.getElementById("imprimir").addEventListener("click",()=>window.print());
+  document.getElementById("copiar").addEventListener("click",copiar);
+  document.getElementById("pdf").addEventListener("click",baixarPDF);
+  document.getElementById("recomecar").addEventListener("click",()=>location.reload());
+  const bc = document.getElementById("vCurta"), bl = document.getElementById("vLonga");
+  const trocar = curta=>{
+    document.getElementById("vistaCurta").classList.toggle("oculto",!curta);
+    document.getElementById("vistaLonga").classList.toggle("oculto",curta);
+    bc.classList.toggle("on",curta); bl.classList.toggle("on",!curta);
+    window.scrollTo({top:0,behavior:"instant"});
+  };
+  bc.addEventListener("click",()=>trocar(true));
+  bl.addEventListener("click",()=>trocar(false));
+}
+
+function montarTexto(){
+  const hoje = new Date().toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"});
+  const marcados = lista.map((x,i)=>({...x,...respostas[i]})).filter(x=>x.v>0);
+  const fortes = marcados.filter(x=>x.v===2);
+  const leves = marcados.filter(x=>x.v===1);
+  const emPaz = BLOCOS.filter((b,bi)=>!marcados.some(x=>x.bi===bi));
+  const ultima = (respostas[0].rot||"").toLowerCase();
+
+  /* ===== vista curta: roteiro para o confessionario ===== */
+  const linha = x=>`<li>${maiuscula(x.m)}<span class="freq">${BLOCOS[x.bi].curto} &middot; ${(x.rot||"").toLowerCase()}</span>${x.nota?`<span class="anot">${escapar(x.nota)}</span>`:""}</li>`;
+  let curta = `<p class="eyebrow">Roteiro para o confession&aacute;rio</p>
+    <h1>Acusa&ccedil;&atilde;o</h1>
+    <p class="data eyebrow">${hoje}</p>
+    <p class="invocacao">&ldquo;Senhor, Tu sabes tudo: Tu sabes que eu Te amo.&rdquo;<small>Antes de tudo, diga esta ora&ccedil;&atilde;o</small></p>
+    <p class="abertura">Aben&ccedil;oe-me, padre, porque pequei.${ultima?` A minha \u00faltima confiss\u00e3o foi faz ${ultima}.`:""}</p>`;
+  if(!marcados.length){
+    curta += `<p class="reflexao">Nada pesou no exame. Diga isso com simplicidade e pe&ccedil;a ao sacerdote um conselho para crescer.</p>`;
+  } else {
+    if(fortes.length) curta += `<p class="grupo-titulo">Primeiro</p><ol class="roteiro">${fortes.map(linha).join("")}</ol>`;
+    if(leves.length) curta += `<p class="grupo-titulo">Depois</p><ol class="roteiro" style="counter-reset:r ${fortes.length}">${leves.map(linha).join("")}</ol>`;
+  }
+  curta += `<p class="abertura">De todos estes pecados e dos que n&atilde;o me lembro, pe&ccedil;o perd&atilde;o a Deus e a penit&ecirc;ncia ao senhor.</p>
+    <p class="grupo-titulo">Ato de contri&ccedil;&atilde;o</p>
+    <p class="oracao-final">Meu Pai e meu Deus, reconhe&ccedil;o com muita dor que pequei! Eu Vos ofendi, &oacute; meu Redentor, e mereci os vossos castigos. Por Maria, minha e vossa M&atilde;e, declaro que n&atilde;o quero pecar mais. Por Ela, eu Vos pe&ccedil;o perd&atilde;o.</p>`;
+
+  /* ===== vista longa: texto para a meditacao ===== */
+  let h = `<p class="eyebrow">Texto para a medita&ccedil;&atilde;o</p>
+  <h1>${marcados.length? "O que a consci&ecirc;ncia apontou" : "Uma consci&ecirc;ncia serena"}</h1>
+  <p class="data eyebrow">${hoje}</p>
+  <p class="invocacao">&ldquo;Senhor, Tu sabes tudo: Tu sabes que eu Te amo.&rdquo;<small>Antes de ler, diga esta ora&ccedil;&atilde;o</small></p>`;
+
+  if(!marcados.length){
+    h += `<p class="reflexao">Nada pesou neste exame. Agrade&ccedil;a a guarda que Deus deu aos seus dias e pe&ccedil;a uma luz mais fina &mdash; e v&aacute; &agrave; confiss&atilde;o assim mesmo: o sacramento tamb&eacute;m &eacute; for&ccedil;a para permanecer.</p>`;
+  } else {
+    h += `<p class="reflexao">Leia devagar, sem ansiedade e sem escr&uacute;pulo: n&atilde;o se trata de reunir provas contra si, mas de olhar com verdade para um amor que espera ser refeito.</p>`;
+
+    if(fortes.length){
+      h += `<div class="destaque"><p class="eyebrow" style="margin-bottom:10px">Comece por aqui</p>
+        <p class="reflexao" style="margin-bottom:12px">Diga estes primeiro ao sacerdote, com a esp&eacute;cie e, na medida do poss&iacute;vel, o n&uacute;mero.</p>
+        <ul class="apontou">${fortes.map(x=>`<li class="forte">${maiuscula(x.m)}<span class="tag">${BLOCOS[x.bi].curto}</span></li>`).join("")}</ul></div>`;
+    }
+
+    BLOCOS.forEach((b,bi)=>{
+      const meus = marcados.filter(x=>x.bi===bi);
+      if(!meus.length) return;
+      h += `<div class="sec">
+        <span class="marcador">${b.marcador}</span>
+        <h2>${b.titulo}</h2>
+        <p class="reflexao">${b.reflexao}</p>
+        <ul class="apontou">${meus.map(x=>`<li class="${x.v===2?"forte":""}">${maiuscula(x.m)}${x.v===2?'<span class="tag">'+(x.rot||"").toLowerCase()+'</span>':""}</li>`).join("")}</ul>
+        ${meus.filter(x=>x.nota).map(x=>`<p class="minha-nota">Anotei: ${escapar(x.nota)}</p>`).join("")}
+        <p class="proposito">Prop&oacute;sito: ${b.proposito}</p>
+      </div>`;
+    });
+
+    if(emPaz.length){
+      h += `<p class="reflexao"><em>Nada pesou em: ${emPaz.map(b=>b.curto.toLowerCase()).join("; ")}. Agrade&ccedil;a &mdash; o que n&atilde;o caiu foi guardado.</em></p>`;
+    }
+  }
+
+  h += `<div class="sec" style="margin-top:38px"><span class="marcador">&middot;</span><h2>Ato de Contri&ccedil;&atilde;o</h2>
+    <p class="oracao-final">Meu Pai e meu Deus, reconhe&ccedil;o com muita dor que pequei! Eu Vos ofendi, &oacute; meu Redentor, e mereci os vossos castigos. Por Maria, minha e vossa M&atilde;e, declaro que n&atilde;o quero pecar mais. Por Ela, eu Vos pe&ccedil;o perd&atilde;o.</p></div>
+
+  <div class="sec"><span class="marcador">&middot;</span><h2>Na hora da confiss&atilde;o</h2>
+    <ol class="passos">
+      <li>Sinal da cruz com o sacerdote e h&aacute; quanto tempo se confessou.</li>
+      <li>Acuse os pecados come&ccedil;ando pelos mais graves, com esp&eacute;cie e n&uacute;mero, sem detalhes desnecess&aacute;rios.</li>
+      <li>Feche com: &ldquo;de todos estes e dos que n&atilde;o me lembro, pe&ccedil;o perd&atilde;o a Deus e a penit&ecirc;ncia ao senhor&rdquo;.</li>
+      <li>Escute o conselho, reze o Ato de Contri&ccedil;&atilde;o e responda &ldquo;am&eacute;m&rdquo; &agrave; absolvi&ccedil;&atilde;o.</li>
+      <li>Cumpra a penit&ecirc;ncia quanto antes e retome um s&oacute; prop&oacute;sito concreto.</li>
+    </ol>
+    <p class="reflexao" style="margin-top:14px">Se n&atilde;o for poss&iacute;vel confessar-se logo, recorra &agrave; contri&ccedil;&atilde;o perfeita: dor sincera por ter ofendido a Deus, nascida do amor a Ele, incluindo o prop&oacute;sito de confessar-se assim que puder.</p>
+  </div>
+
+  <p class="fecho">&ldquo;Se queres entrar na vida, guarda os mandamentos.&rdquo; (Mt 19, 17)</p>`;
+
+  return `<div class="switch nao-imprime">
+      <button id="vCurta" class="on">Roteiro</button>
+      <button id="vLonga">Medita&ccedil;&atilde;o</button>
+    </div>
+    <div id="vistaCurta">${curta}</div>
+    <div id="vistaLonga" class="oculto">${h}</div>
+    <div class="acoes nao-imprime">
+      <button class="btn" id="pdf">Baixar o roteiro em PDF</button>
+      <button class="btn btn-vazado" id="imprimir">Imprimir</button>
+      <button class="btn btn-vazado" id="copiar">Copiar texto</button>
+      <button class="btn btn-vazado" id="recomecar">Encerrar e apagar</button>
+    </div>`;
+}
+
+/* ===== roteiro enxuto em PDF ===== */
+function dadosRoteiro(){
+  const marcados = lista.map((x,i)=>({...x,...respostas[i]})).filter(x=>x.v>0);
+  return {
+    data: new Date().toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"}),
+    ultima: (respostas[0].rot||"").toLowerCase(),
+    itens: marcados.filter(x=>x.v===2).concat(marcados.filter(x=>x.v===1))
+      .map(x=>({texto:maiuscula(x.m), freq:(x.rot||"").toLowerCase(), grave:x.v===2, nota:x.nota||""}))
+  };
+}
+
+function baixarPDF(){
+  const btn = document.getElementById("pdf");
+  const JS = window.jspdf && window.jspdf.jsPDF;
+  if(!JS){ window.print(); return; }
+  try{
+    const d = dadosRoteiro();
+    const doc = new JS({unit:"pt",format:"a5"});
+    const L=40, W=doc.internal.pageSize.getWidth()-L*2, H=doc.internal.pageSize.getHeight();
+    let y=54;
+    const escreve=(txt,{size=10.5,estilo="normal",cor=[23,26,32],recuo=0,depois=10}={})=>{
+      doc.setFont("times",estilo); doc.setFontSize(size); doc.setTextColor(cor[0],cor[1],cor[2]);
+      doc.splitTextToSize(txt,W-recuo).forEach(linha=>{
+        if(y+size*1.35 > H-44){ doc.addPage(); y=54; }
+        doc.text(linha,L+recuo,y); y+=size*1.35;
+      });
+      y+=depois;
+    };
+    escreve("Roteiro para a Confiss\u00e3o",{size:17,estilo:"bold",cor:[147,34,46],depois:3});
+    escreve(d.data,{size:9,cor:[110,116,125],depois:16});
+    escreve("\u201cSenhor, Tu sabes tudo: Tu sabes que eu Te amo.\u201d",{size:11.5,estilo:"italic",cor:[147,34,46],depois:16});
+    escreve("\u201cAben\u00e7oe-me, padre, porque pequei."+(d.ultima?" A minha \u00faltima confiss\u00e3o foi faz "+d.ultima+".":"")+"\u201d",
+            {size:11,estilo:"italic",cor:[38,64,122],depois:18});
+    escreve("Acuso-me de:",{size:12,estilo:"bold",cor:[147,34,46],depois:8});
+    if(d.itens.length){
+      d.itens.forEach((i,n)=>{
+        escreve((n+1)+". "+i.texto+(i.freq?" \u2014 "+i.freq:""),{estilo:i.grave?"bold":"normal",depois:i.nota?2:5});
+        if(i.nota) escreve(i.nota,{size:9.5,estilo:"italic",cor:[110,116,125],recuo:16,depois:5});
+      });
+    } else {
+      escreve("Nada pesou neste exame; venho pedir a gra\u00e7a de perseverar.",{depois:5});
+    }
+    y+=10;
+    escreve("\u201cDe todos estes pecados e dos que n\u00e3o me lembro, pe\u00e7o perd\u00e3o a Deus e a penit\u00eancia ao senhor.\u201d",
+            {size:11,estilo:"italic",cor:[38,64,122],depois:18});
+    escreve("Ato de contri\u00e7\u00e3o",{size:12,estilo:"bold",cor:[147,34,46],depois:8});
+    escreve("Meu Pai e meu Deus, reconhe\u00e7o com muita dor que pequei! Eu Vos ofendi, \u00f3 meu Redentor, e mereci os vossos castigos. Por Maria, minha e vossa M\u00e3e, declaro que n\u00e3o quero pecar mais. Por Ela, eu Vos pe\u00e7o perd\u00e3o.",
+            {estilo:"italic",depois:0});
+    const nome = "roteiro-confissao-"+new Date().toISOString().slice(0,10)+".pdf";
+    try{ doc.save(nome); }
+    catch(e){ window.open(doc.output("bloburl"),"_blank"); }
+    btn.textContent = "PDF gerado";
+  }catch(e){
+    btn.textContent = "Use Imprimir \u2192 salvar em PDF";
+  }
+  setTimeout(()=>btn.textContent="Baixar o roteiro em PDF",2800);
+}
+
+function maiuscula(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+function escapar(s){ const d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+
+function copiar(){
+  const vista = document.getElementById("vistaCurta").classList.contains("oculto")
+    ? document.getElementById("vistaLonga") : document.getElementById("vistaCurta");
+  const txt = vista.innerText.trim();
+  const btn = document.getElementById("copiar");
+  navigator.clipboard.writeText(txt).then(
+    ()=>{ btn.textContent="Texto copiado"; setTimeout(()=>btn.textContent="Copiar texto",2200); },
+    ()=>{ btn.textContent="Não foi possível copiar"; setTimeout(()=>btn.textContent="Copiar texto",2200); }
+  );
+}
+
+document.addEventListener("keydown",e=>{
+  if(exame.classList.contains("oculto")) return;
+  const ops = lista[atual].opcoes;
+  const i = +e.key-1;
+  if(i>=0 && i<ops.length) responder(ops[i].v, ops[i].t);
+});
+</script>
+</body>
+</html>
