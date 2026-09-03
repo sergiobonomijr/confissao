@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Exame de consciência em 38 perguntas curtas, pelos mandamentos, para preparar a Confissão. Nada é gravado: tudo permanece no seu dispositivo.">
+<meta name="description" content="Exame de consciência em 40 perguntas curtas, pelos mandamentos, para preparar a Confissão. Nada é gravado: tudo permanece no seu dispositivo.">
 <meta name="theme-color" content="#93222E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Exame de Consciência — preparação para a Confissão">
-<meta property="og:description" content="38 perguntas curtas, uma de cada vez. Ao final, um roteiro para o confessionário e um texto para a meditação.">
+<meta property="og:description" content="40 perguntas curtas, uma de cada vez. Ao final, um roteiro para o confessionário e um texto para a meditação.">
 <meta property="og:locale" content="pt_BR">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F3F1EC'/%3E%3Crect x='14.6' y='5' width='2.8' height='22' fill='%2393222E'/%3E%3Crect x='9' y='11' width='14' height='2.8' fill='%2393222E'/%3E%3C/svg%3E">
 <title>Exame de Consciência — preparação para a Confissão</title>
@@ -236,7 +236,7 @@ textarea::placeholder{color:#8B9199}
     <p class="eyebrow">Preparação para a Confissão</p>
     <h1>Exame de<br>consciência</h1>
     <div class="regra"></div>
-    <p>São 38 perguntas curtas, uma de cada vez, percorrendo os mandamentos. Ao final, o portal reúne o que a sua consciência apontou num texto breve, para ler na meditação e levar à confissão.</p>
+    <p>São 40 perguntas curtas, uma de cada vez, percorrendo os mandamentos. Ao final, o portal reúne o que a sua consciência apontou num texto breve, para ler na meditação e levar à confissão.</p>
     <p class="oracao">Meu Deus e Senhor, iluminai o meu espírito, para que eu conheça a natureza e o número dos meus pecados, deles me arrependa e os confesse com verdadeira dor e firme propósito de não mais Vos ofender.</p>
     <button class="btn" id="comecar">Começar o exame</button>
     <p class="nota-rodape" style="margin-top:34px">Sem pressa e sem escrúpulo. Se uma pergunta não toca a sua vida, responda “não” e siga adiante — o exame é auxílio, não acusação.<br><br>Nada do que você responder sai deste dispositivo nem é gravado: ao fechar a página, tudo desaparece.</p>
@@ -326,14 +326,15 @@ const BLOCOS = [
 },
 {
   marcador:"VI \u00b7 IX", titulo:"Guardar a castidade em obras, palavras e desejos", curto:"Sexto e nono mandamentos",
-  reflexao:"O que decide a batalha costuma vir antes da queda: a tela aberta, o pensamento acolhido, a ocasi\u00e3o conservada. Examine com coragem e sem escr\u00fapulo.",
+  reflexao:"O que decide a batalha costuma vir antes da queda: a tela aberta, o pensamento acolhido, a ocasi\u00e3o conservada. E a fidelidade prometida vai muito al\u00e9m de n\u00e3o trair \u2014 \u00e9 dar a vida, a pr\u00f3pria vida, por toda a vida: o c\u00f4njuge antes de qualquer outra pessoa, o casamento antes de qualquer outra coisa.",
   proposito:"Cortar a ocasi\u00e3o pela raiz: tirar do celular o caminho f\u00e1cil que j\u00e1 sei aonde leva.",
   perguntas:[
     {q:"Vi imagens ou v\u00eddeos impuros?", m:"vi imagens ou v\u00eddeos impuros"},
     {q:"Acolhi pensamentos ou desejos impuros, em vez de afast\u00e1-los?", m:"acolhi pensamentos que devia ter afastado"},
     {q:"Pratiquei atos impuros, sozinho ou com outra pessoa?", m:"pratiquei atos contr\u00e1rios \u00e0 castidade"},
     {q:"Havia circunst\u00e2ncia que agravasse a falta \u2014 pessoa casada, consagrada, parente ou menor?", m:"havia circunst\u00e2ncia agravante que preciso mencionar", opcoes:SIMNAO},
-    {q:"Faltei \u00e0 fidelidade conjugal, em pensamento ou em ato?", m:"faltei \u00e0 fidelidade que prometi", opcoes:SIMNAO}
+    {q:"Faltei \u00e0 fidelidade conjugal, em pensamento ou em ato?", m:"faltei \u00e0 fidelidade que prometi", opcoes:SIMNAO},
+    {q:"Deixei o meu c\u00f4njuge perder o primeiro lugar, pondo outras pessoas, o trabalho ou os meus gostos \u00e0 frente dele?", m:"deixei o meu casamento perder o primeiro lugar"}
   ]
 },
 {
@@ -360,13 +361,14 @@ const BLOCOS = [
 },
 {
   marcador:"\u00b7", titulo:"Trabalho, tempo e caridade", curto:"Deveres de estado",
-  reflexao:"O trabalho de cada dia \u00e9 mat\u00e9ria de santidade ou fuga; a diferen\u00e7a est\u00e1 na inten\u00e7\u00e3o e em quem paga a conta do excesso.",
+  reflexao:"O trabalho de cada dia \u00e9 mat\u00e9ria de santidade ou fuga; a diferen\u00e7a est\u00e1 na inten\u00e7\u00e3o e em quem paga a conta do excesso. E a caridade n\u00e3o para nos que est\u00e3o \u00e0 minha volta: pergunte tamb\u00e9m pelos que ningu\u00e9m v\u00ea.",
   proposito:"Oferecer o trabalho logo ao come\u00e7ar e encerrar o dia numa hora combinada comigo mesmo.",
   perguntas:[
     {q:"Deixei o trabalho tomar o tempo e as for\u00e7as que devia \u00e0 fam\u00edlia e \u00e0 ora\u00e7\u00e3o?", m:"deixei o trabalho invadir o que era da fam\u00edlia e da ora\u00e7\u00e3o"},
     {q:"Trabalhei s\u00f3 para o meu pr\u00f3prio nome, sem oferecer o dia a Deus?", m:"trabalhei apenas para o meu pr\u00f3prio nome"},
     {q:"Cedi \u00e0 pregui\u00e7a e \u00e0s distra\u00e7\u00f5es em vez de servir?", m:"escolhi a comodidade e a distra\u00e7\u00e3o em vez do servi\u00e7o"},
-    {q:"Deixei de ajudar quem precisava de mim, podendo faz\u00ea-lo?", m:"passei ao largo de quem precisava de mim"}
+    {q:"Deixei de ajudar quem precisava de mim, podendo faz\u00ea-lo?", m:"passei ao largo de quem precisava de mim"},
+    {q:"Deixei de cuidar dos pobres e dos doentes, ou tive vergonha de me aproximar deles?", m:"deixei de cuidar dos pobres e dos doentes"}
   ]
 }
 ];

@@ -1,12 +1,12 @@
 # Exame de Consciência
 
-Portal em página única para preparar a Confissão: 38 perguntas curtas percorrendo
+Portal em página única para preparar a Confissão: 40 perguntas curtas percorrendo
 os mandamentos, uma de cada vez. Ao final, reúne o que a consciência apontou em
 duas vistas — **Roteiro** (para levar ao confessionário) e **Meditação** (texto
 mais longo, com propósitos por mandamento) — com opções de imprimir, copiar e
 baixar em PDF.
 
-**Acesso:** https://giobonomijr.github.io/confissao/
+**Acesso:** https://sergiobonomijr.github.io/confissao/
 
 ## Privacidade
 
