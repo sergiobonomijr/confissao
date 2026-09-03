@@ -6,13 +6,21 @@ duas vistas — **Roteiro** (para levar ao confessionário) e **Meditação** (t
 mais longo, com propósitos por mandamento) — com opções de imprimir, copiar e
 baixar em PDF.
 
-**Acesso:** https://sergiobonomijr.github.io/confissao/
+**Acesso:** https://confissao.online
 
 ## Privacidade
 
 Nada é enviado a servidor algum. Todas as respostas ficam apenas na memória do
 navegador e desaparecem ao fechar a página. Não há cookies, analytics nem
 armazenamento local.
+
+## Domínio
+
+O site é servido pelo GitHub Pages a partir do branch `main`, com domínio
+próprio (`confissao.online`, registrado na Namecheap) apontado por quatro
+registros A para `185.199.108-111.153` e um CNAME de `www` para
+`sergiobonomijr.github.io`. O arquivo `CNAME` na raiz deste repositório amarra
+o domínio ao site — não o remova.
 
 ## Técnico
 
