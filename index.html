@@ -4,13 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Exame de consciência em 40 perguntas curtas, pelos mandamentos, para preparar a Confissão. Nada é gravado: tudo permanece no seu dispositivo.">
-<meta name="theme-color" content="#93222E">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Exame de Consciência — preparação para a Confissão">
-<meta property="og:description" content="40 perguntas curtas, uma de cada vez. Ao final, um roteiro para o confessionário e um texto para a meditação.">
-<meta property="og:locale" content="pt_BR">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F3F1EC'/%3E%3Crect x='14.6' y='5' width='2.8' height='22' fill='%2393222E'/%3E%3Crect x='9' y='11' width='14' height='2.8' fill='%2393222E'/%3E%3C/svg%3E">
 <title>Exame de Consciência — preparação para a Confissão</title>
 <style>
 :root{
@@ -163,6 +156,24 @@ textarea::placeholder{color:#8B9199}
 .fecho{margin-top:44px;color:var(--muted);font-size:15.5px;border-top:1px solid var(--linha);padding-top:18px}
 .oculto{display:none}
 
+/* ---------- campo de data ---------- */
+.campo-data{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.campo-data input{
+  flex:1 1 150px;min-width:0;background:var(--papel2);color:var(--tinta);
+  border:1px solid var(--linha);border-radius:3px;padding:14px 16px;
+  font-family:var(--serif);font-size:17.5px;letter-spacing:.04em;
+}
+.campo-data input::placeholder{color:#8B9199;letter-spacing:.06em}
+.campo-data button{
+  font-family:var(--serif);font-size:16.5px;color:#fff;background:var(--rubrica);
+  border:1px solid var(--rubrica);border-radius:3px;padding:0 20px;cursor:pointer;
+}
+.erro-data{color:var(--rubrica);font-size:15px;margin:-6px 0 14px}
+.ou-data{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+@media(prefers-color-scheme:dark){
+  .campo-data button{color:#12151A}
+}
+
 /* ---------- roteiro enxuto ---------- */
 .switch{display:flex;gap:8px;margin:0 0 28px}
 .switch button{
@@ -258,7 +269,7 @@ const PADRAO = [{t:"N\u00e3o",v:0},{t:"Uma vez ou outra",v:1},{t:"Com frequ\u00e
 const SIMNAO = [{t:"N\u00e3o",v:0},{t:"Sim",v:2}];
 const SIMLEVE = [{t:"N\u00e3o",v:0},{t:"Sim",v:1}];
 const DIAS = [{t:"Não",v:0},{t:"Alguns dias",v:1},{t:"Quase todos os dias",v:2}];
-const TEMPO = [{t:"Menos de um m\u00eas",v:0},{t:"Alguns meses",v:1},{t:"Mais de um ano",v:2}];
+const TEMPO = [{t:"Menos de um m\u00eas",v:0},{t:"Alguns meses",v:1},{t:"Mais de um ano",v:2},{t:"N\u00e3o me recordo",v:1}];
 
 const BLOCOS = [
 {
@@ -266,7 +277,7 @@ const BLOCOS = [
   reflexao:"Comece pelo caminho j\u00e1 andado: quanto tempo passou e o que ficou por dizer.",
   proposito:"Dizer logo no in\u00edcio h\u00e1 quanto tempo n\u00e3o me confesso \u2014 e n\u00e3o guardar nada por vergonha.",
   perguntas:[
-    {q:"Quanto tempo faz desde a minha \u00faltima confiss\u00e3o?", m:"faz muito tempo desde a minha \u00faltima confiss\u00e3o", opcoes:TEMPO},
+    {q:"Quanto tempo faz desde a minha \u00faltima confiss\u00e3o?", m:"faz muito tempo desde a minha \u00faltima confiss\u00e3o", opcoes:TEMPO, tipo:"data"},
     {q:"Calei algum pecado grave por vergonha numa confiss\u00e3o anterior?", m:"calei um pecado grave por vergonha", opcoes:SIMNAO}
   ]
 },
@@ -374,8 +385,8 @@ const BLOCOS = [
 ];
 
 const lista = [];
-BLOCOS.forEach((b,bi)=>b.perguntas.forEach((p,pi)=>lista.push({bi,pi,q:p.q,m:p.m,opcoes:p.opcoes||PADRAO})));
-const respostas = lista.map(()=>({v:null,nota:"",rot:""}));
+BLOCOS.forEach((b,bi)=>b.perguntas.forEach((p,pi)=>lista.push({bi,pi,q:p.q,m:p.m,opcoes:p.opcoes||PADRAO,tipo:p.tipo||""})));
+const respostas = lista.map(()=>({v:null,nota:"",rot:"",data:"",dias:null}));
 let atual = 0;
 
 const capa = document.getElementById("capa");
@@ -417,6 +428,13 @@ function render(){
       </div>
       <p class="eyebrow">Pergunta ${atual+1} de ${lista.length}</p>
       <p class="pergunta">${item.q}</p>
+      ${item.tipo==="data"?`
+        <div class="campo-data">
+          <input id="dataConf" inputmode="numeric" maxlength="10" placeholder="DD/MM/AAAA" value="${r.data||""}" aria-label="Data da última confissão">
+          <button id="okData">Confirmar</button>
+        </div>
+        <p class="erro-data oculto" id="erroData"></p>
+        <p class="ou-data">ou, se não lembrar a data exata</p>`:""}
       <div class="opcoes">
         ${item.opcoes.map((o,i)=>`<button class="opc" data-v="${o.v}" data-i="${i}">${o.t}</button>`).join("")}
       </div>
@@ -427,6 +445,17 @@ function render(){
       </div>
     </div>`;
   palco.querySelectorAll(".opc").forEach(el=>el.addEventListener("click",()=>responder(+el.dataset.v,item.opcoes[+el.dataset.i].t)));
+  if(item.tipo==="data"){
+    const campo = document.getElementById("dataConf");
+    campo.addEventListener("input",()=>{
+      const d = campo.value.replace(/\D/g,"").slice(0,8);
+      campo.value = d.length>4 ? d.slice(0,2)+"/"+d.slice(2,4)+"/"+d.slice(4)
+                  : d.length>2 ? d.slice(0,2)+"/"+d.slice(2)
+                  : d;
+    });
+    campo.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); responderData(campo.value); }});
+    document.getElementById("okData").addEventListener("click",()=>responderData(campo.value));
+  }
   document.getElementById("voltar").addEventListener("click",()=>{ if(atual>0){ guardarNota(); atual--; render(); }});
   document.getElementById("anotar").addEventListener("click",()=>{
     const area = document.getElementById("areaNota");
@@ -445,8 +474,39 @@ function guardarNota(){
   if(n) respostas[atual].nota = n.value.trim();
 }
 
+function responderData(txt){
+  const erro = document.getElementById("erroData");
+  const mostra = msg=>{ erro.textContent = msg; erro.classList.remove("oculto"); };
+  const partes = (txt||"").match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if(!partes) return mostra("Escreva a data no formato DD/MM/AAAA.");
+  const dia=+partes[1], mes=+partes[2], ano=+partes[3];
+  const d = new Date(ano, mes-1, dia);
+  if(d.getDate()!==dia || d.getMonth()!==mes-1 || d.getFullYear()!==ano) return mostra("Essa data n\u00e3o existe.");
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  if(d > hoje) return mostra("A data n\u00e3o pode estar no futuro.");
+  const dias = Math.round((hoje - d)/86400000);
+  const r = respostas[atual];
+  r.data = txt;
+  r.dias = dias;
+  r.m = `h\u00e1 ${dias} ${dias===1?"dia":"dias"} desde a minha \u00faltima confiss\u00e3o (${txt})`;
+  responder(dias<=31?0:dias<=365?1:2, "em "+txt);
+}
+
+function textoUltima(){
+  const r = respostas[0];
+  if(r.data) return `A minha \u00faltima confiss\u00e3o foi h\u00e1 ${r.dias} ${r.dias===1?"dia":"dias"}.`;
+  if(r.rot === "N\u00e3o me recordo") return "N\u00e3o me recordo h\u00e1 quanto tempo foi a minha \u00faltima confiss\u00e3o.";
+  if(r.rot) return `A minha \u00faltima confiss\u00e3o foi h\u00e1 ${r.rot.toLowerCase()}.`;
+  return "";
+}
+
 function responder(v,rot){
   guardarNota();
+  if(atual===0 && rot.slice(0,3)!=="em "){
+    respostas[0].data = ""; respostas[0].dias = null;
+    if(rot === "N\u00e3o me recordo") respostas[0].m = "n\u00e3o me recordo quando foi a minha \u00faltima confiss\u00e3o";
+    else delete respostas[0].m;
+  }
   respostas[atual].v = v;
   respostas[atual].rot = rot;
   if(atual < lista.length-1){ atual++; render(); }
@@ -486,7 +546,6 @@ function montarTexto(){
   const fortes = marcados.filter(x=>x.v===2);
   const leves = marcados.filter(x=>x.v===1);
   const emPaz = BLOCOS.filter((b,bi)=>!marcados.some(x=>x.bi===bi));
-  const ultima = (respostas[0].rot||"").toLowerCase();
 
   /* ===== vista curta: roteiro para o confessionario ===== */
   const linha = x=>`<li>${maiuscula(x.m)}<span class="freq">${BLOCOS[x.bi].curto} &middot; ${(x.rot||"").toLowerCase()}</span>${x.nota?`<span class="anot">${escapar(x.nota)}</span>`:""}</li>`;
@@ -494,7 +553,7 @@ function montarTexto(){
     <h1>Acusa&ccedil;&atilde;o</h1>
     <p class="data eyebrow">${hoje}</p>
     <p class="invocacao">&ldquo;Senhor, Tu sabes tudo: Tu sabes que eu Te amo.&rdquo;<small>Antes de tudo, diga esta ora&ccedil;&atilde;o</small></p>
-    <p class="abertura">Aben&ccedil;oe-me, padre, porque pequei.${ultima?` A minha \u00faltima confiss\u00e3o foi faz ${ultima}.`:""}</p>`;
+    <p class="abertura">Aben&ccedil;oe-me, padre, porque pequei.${textoUltima()?" "+textoUltima():""}</p>`;
   if(!marcados.length){
     curta += `<p class="reflexao">Nada pesou no exame. Diga isso com simplicidade e pe&ccedil;a ao sacerdote um conselho para crescer.</p>`;
   } else {
@@ -575,7 +634,7 @@ function dadosRoteiro(){
   const marcados = lista.map((x,i)=>({...x,...respostas[i]})).filter(x=>x.v>0);
   return {
     data: new Date().toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"}),
-    ultima: (respostas[0].rot||"").toLowerCase(),
+    ultima: textoUltima(),
     itens: marcados.filter(x=>x.v===2).concat(marcados.filter(x=>x.v===1))
       .map(x=>({texto:maiuscula(x.m), freq:(x.rot||"").toLowerCase(), grave:x.v===2, nota:x.nota||""}))
   };
@@ -601,7 +660,7 @@ function baixarPDF(){
     escreve("Roteiro para a Confiss\u00e3o",{size:17,estilo:"bold",cor:[147,34,46],depois:3});
     escreve(d.data,{size:9,cor:[110,116,125],depois:16});
     escreve("\u201cSenhor, Tu sabes tudo: Tu sabes que eu Te amo.\u201d",{size:11.5,estilo:"italic",cor:[147,34,46],depois:16});
-    escreve("\u201cAben\u00e7oe-me, padre, porque pequei."+(d.ultima?" A minha \u00faltima confiss\u00e3o foi faz "+d.ultima+".":"")+"\u201d",
+    escreve("\u201cAben\u00e7oe-me, padre, porque pequei."+(d.ultima?" "+d.ultima:"")+"\u201d",
             {size:11,estilo:"italic",cor:[38,64,122],depois:18});
     escreve("Acuso-me de:",{size:12,estilo:"bold",cor:[147,34,46],depois:8});
     if(d.itens.length){
@@ -644,6 +703,9 @@ function copiar(){
 
 document.addEventListener("keydown",e=>{
   if(exame.classList.contains("oculto")) return;
+  const t = e.target;
+  if(t && (t.tagName==="INPUT" || t.tagName==="TEXTAREA" || t.isContentEditable)) return;
+  if(e.ctrlKey || e.metaKey || e.altKey) return;
   const ops = lista[atual].opcoes;
   const i = +e.key-1;
   if(i>=0 && i<ops.length) responder(ops[i].v, ops[i].t);
